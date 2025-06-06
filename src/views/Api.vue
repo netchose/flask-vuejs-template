@@ -6,7 +6,7 @@
     <a href="" @click.prevent="fetchSecureResource">Fetch Secure Resource</a>
     <h4>Results</h4>
     <p v-for="r in resources" :key="r.timestamp">
-      Server Timestamp: {{r.timestamp | formatTimestamp }}
+      Server Timestamp: {{ formatTimestamp(r.timestamp) }}
     </p>
     <p>{{error}}</p>
   </div>
@@ -25,6 +25,10 @@ export default {
     }
   },
   methods: {
+    formatTimestamp (timestamp) {
+      const datetime = new Date(timestamp)
+      return datetime.toLocaleTimeString('en-US')
+    },
     fetchResource () {
       $backend.fetchResource()
         .then(responseData => {
