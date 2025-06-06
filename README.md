@@ -11,7 +11,7 @@ _Flask + Vue.js Web Application Template_
 * Minimal Flask 1.0 App
 * [Flask-RestPlus](http://flask-restplus.readthedocs.io) API with class-based secure resource routing
 * Starter [PyTest](http://pytest.org) test suite
-* [vue-cli 3](https://github.com/vuejs/vue-cli/blob/dev/docs/README.md) + yarn
+* [Vite](https://vitejs.dev) + yarn
 * [Vuex](https://vuex.vuejs.org/)
 * [Vue Router](https://router.vuejs.org/)
 * [Axios](https://github.com/axios/axios/) for backend communication
@@ -41,7 +41,7 @@ Prefer Django? Checkout the [gtalarico/django-vue-template](https://github.com/g
 ## Template Structure
 
 The template uses Flask & Flask-RestPlus to create a minimal REST style API,
-and let's VueJs + vue-cli handle the front end and asset pipline.
+and lets Vue.js with Vite handle the front end and asset pipeline.
 Data from the python server to the Vue application is passed by making Ajax requests.
 
 ### Application Structure
@@ -55,7 +55,7 @@ resource routing.
 
 A Flask view is used to serve the `index.html` as an entry point into the Vue app at the endpoint `/`.
 
-The template uses vue-cli 3 and assumes Vue Cli & Webpack will manage front-end resources and assets, so it does overwrite template delimiter.
+The template uses Vite for front-end development and assumes Vite will manage front-end resources and assets, so it does overwrite template delimiter.
 
 The Vue instance is preconfigured with Filters, Vue-Router, Vuex; each of these can easilly removed if they are not desired.
 
@@ -68,8 +68,8 @@ The Vue instance is preconfigured with Filters, Vue-Router, Vuex; each of these 
 | `/app/client.py`     | Flask Client (`/`)                         |
 | `/src`               | Vue App .                                  |
 | `/src/main.js`       | JS Application Entry Point                 |
-| `/public/index.html` | Html Application Entry Point (`/`)         |
-| `/public/static`     | Static Assets                              |
+| `/index.html`        | Html Application Entry Point (`/`)         |
+| `/public`            | Static Assets                              |
 | `/dist/`             | Bundled Assets Output (generated at `yarn build` |
 
 
@@ -80,7 +80,7 @@ The Vue instance is preconfigured with Filters, Vue-Router, Vuex; each of these 
 Before getting started, you should have the following installed and running:
 
 - [X] Yarn - [instructions](https://yarnpkg.com/en/docs/install#mac-stable)
-- [X] Vue Cli 3 - [instructions](https://cli.vuejs.org/guide/installation.html)
+- [X] Vite - [instructions](https://vitejs.dev/guide/)
 - [X] Python 3
 - [X] Pipenv (optional)
 - [X] Heroku Cli (if deploying to Heroku)
@@ -115,19 +115,19 @@ Run Flask Api development server:
 $ python run.py
 ```
 
-From another tab in the same directory, start the webpack dev server:
+From another tab in the same directory, start the Vite dev server:
 
 ```
-$ yarn serve
+$ yarn dev
 ```
 
 The Vuejs application will be served from `localhost:8080` and the Flask Api
 and static files will be served from `localhost:5000`.
 
 The dual dev-server setup allows you to take advantage of
-webpack's development server with hot module replacement.
+Vite's development server with hot module replacement.
 
-Proxy config in `vue.config.js` is used to route the requests
+Proxy config in `vite.config.js` is used to route the requests
 back to Flask's Api on port 5000.
 
 If you would rather run a single dev server, you can run Flask's
